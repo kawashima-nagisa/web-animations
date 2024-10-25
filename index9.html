@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    #book {
+      width: 200px;
+      height: 300px;
+      position: relative;
+      perspective: 1000px;
+      margin: 0 auto;
+    }
+
+    .page,
+    .page-lock {
+      width: 100%;
+      height: 100%;
+      border: 1px solid black;
+      background-color: beige;
+      position: absolute;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+
+    .page {
+      transform-origin: left center;
+    }
+
+    .page.lock {
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="book">
+    <div class="page-lock"></div>
+    <div class="page" id="page1"></div>
+    <div class="page" id="page2"></div>
+    <div class="page" id="page3"></div>
+    <div class="page" id="page4"></div>
+  </div>
+
+  <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+
+    document.getElementById('book').addEventListener('click', (e) => {
+      const bookRect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - bookRect.left;
+
+      if (clickX > bookRect.width / 2) {
+        // 右側をクリックした場合（次のページへ）
+        if (currentPage < pages.length) {
+          pages[currentPage].style.transform = 'rotateY(-180deg)';
+          currentPage++;
+        }
+      } else {
+        // 左側をクリックした場合（前のページへ戻る）
+        if (currentPage > 0) {
+          currentPage--;
+          pages[currentPage].style.transform = 'rotateY(0deg)';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

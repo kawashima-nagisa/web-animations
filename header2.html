@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a {
+      width: 10em;
+      display: block;
+      height: 2em;
+      position: relative;
+    }
+
+    .dropdown-item {
+      background: red;
+      border-radius: 13px;
+      opacity: 0;
+      margin-bottom: 10px;
+    }
+
+    .dropdown {
+      visibility: hidden;
+      transition: opacity 2.0s, visibility 1.5s;
+    }
+
+
+    .animation-link:hover+.dropdown,
+    .dropdown.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .animation-link:hover+.dropdown .dropdown-item:nth-child(1),
+    .dropdown.active .dropdown-item:nth-child(1) {
+      animation: fadeIn 2.0s ease forwards;
+      animation-delay: 0s;
+    }
+
+    .animation-link:hover+.dropdown .dropdown-item:nth-child(2),
+    .dropdown.active .dropdown-item:nth-child(2) {
+      animation: fadeIn 2.0s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .animation-link:hover+.dropdown .dropdown-item:nth-child(3),
+    .dropdown.active .dropdown-item:nth-child(3) {
+      animation: fadeIn 2.0s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .dropdown.inactive .dropdown-item:nth-child(1) {
+      animation: fadeOut 2.0s ease forwards;
+      animation-delay: 0s;
+    }
+
+    .dropdown.inactive .dropdown-item:nth-child(2) {
+      animation: fadeOut 2.0s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .dropdown.inactive .dropdown-item:nth-child(3) {
+      animation: fadeOut 2.0s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+    }
+
+    a>div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      font-family: Noto Serif JP;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: rgba(0, 0, 0, 1);
+    }
+
+    a>div>span {
+      display: inline-block;
+      transition: transform .4s;
+      transform-origin: 0 50% 10px;
+    }
+
+    .jp>span {
+      transform: rotateX(90deg);
+    }
+
+    a:hover .jp>span {
+      transform: rotateX(0deg);
+    }
+
+    a:hover .eng>span {
+      transform: rotateX(-90deg);
+    }
+
+    /*以下　ばつボタン*/
+
+    .animation-link>a::before,
+    .animation-link>a::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 84%;
+      width: 2px;
+      /* 棒の幅（太さ） */
+      height: 15px;
+      /* 棒の高さ */
+      background: #333;
+      transition: transform .5s;
+    }
+
+    .animation-link>a::before {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .animation-link>a::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .animation-link>a:hover::before {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .animation-link>a:hover::after {
+      height: 1px;
+      animation: shrinkHeight .5s forwards;
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+
+    @keyframes shrinkHeight {
+      0% {
+        height: 15px;
+      }
+
+      100% {
+        height: 1px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 正しい構造に修正 -->
+  <div class="animation-link item__link">
+    <a href="javascript:void(0);">
+      <div class="eng title_text">事業内容</div>
+      <div class="jp title_text">事業内容</div>
+    </a>
+  </div>
+  <div class="dropdown">
+    <a href="javascript:void(0);" class="dropdown-item">
+      <div class="eng title_text2">事業内容</div>
+      <div class="jp title_text2">事業内容</div>
+    </a>
+    <a href="javascript:void(0);" class="dropdown-item">
+      <div class="eng title_text2">事業内容</div>
+      <div class="jp title_text2">事業内容</div>
+    </a>
+    <a href="javascript:void(0);" class="dropdown-item">
+      <div class="eng title_text2">事業内容</div>
+      <div class="jp title_text2">事業内容</div>
+    </a>
+  </div>
+
+
+  <script>
+    function TextAnimation() {
+      const animationTexts = document.querySelectorAll('.title_text, .title_text2');
+
+      animationTexts.forEach(animationText => {
+        const letters = animationText.textContent.split('');
+        let titleText = '';
+
+        letters.forEach((letter, index) => {
+          titleText += `<span style="transition-delay: ${index * 0.1}s;">${letter}</span>`;
+        });
+
+        animationText.innerHTML = titleText;
+      });
+    }
+
+    TextAnimation();
+
+    // JavaScript to manage hover states
+    const animationLink = document.querySelector('.animation-link');
+    const dropdown = animationLink.nextElementSibling;
+
+    animationLink.addEventListener('mouseenter', () => {
+      dropdown.classList.add('active');
+      dropdown.classList.remove('inactive');
+    });
+
+    animationLink.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!dropdown.matches(':hover')) {
+          dropdown.classList.remove('active');
+          dropdown.classList.add('inactive');
+        }
+      }, 100);
+    });
+
+    dropdown.addEventListener('mouseenter', () => {
+      dropdown.classList.add('active');
+      dropdown.classList.remove('inactive');
+    });
+
+    dropdown.addEventListener('mouseleave', () => {
+      setTimeout(() => {
+        if (!animationLink.matches(':hover')) {
+          dropdown.classList.remove('active');
+          dropdown.classList.add('inactive');
+        }
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>

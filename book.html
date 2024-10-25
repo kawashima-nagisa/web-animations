@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!-- jQueryのCDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Hammer.jsのCDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+
+<body>
+  <section class="home__books">
+    <div class="book-all">
+      <div class="scene">
+        <article class="book">
+          <section class="page flipped initial">
+            <div class="front">
+            </div>
+            <div class="back">
+              <h1>– 1 –</h1>
+              <p>
+                Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der
+                Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel? Gerade jetzt, wo er
+                das
+                Ding seines Lebens gedreht hatte und mit der Beute verschwinden wollte!
+              </p>
+
+            </div>
+          </section>
+          <section class="page active">
+            <div class="front">
+              <h1>– 2 –</h1>
+              <p>
+                Sehen Sie, Webstandards sind das Regelwerk, auf dem Webseiten aufbauen. So gibt es Regeln für HTML, CSS,
+                JavaScript oder auch XML; Worte, die Sie vielleicht schon einmal von Ihrem Entwickler gehört haben.
+                Diese
+                Standards sorgen dafür, dass alle Beteiligten aus einer Webseite den größten Nutzen ziehen.
+              </p>
+
+            </div>
+            <div class="back">
+              <h1>– 3 –</h1>
+              <p>
+                Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der
+                Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel? Gerade jetzt, wo er
+                das
+                Ding seines Lebens gedreht hatte und mit der Beute verschwinden wollte!
+              </p>
+
+            </div>
+          </section>
+          <section class="page">
+            <div class="front">
+              <h1>– 4 –</h1>
+              <p>
+                Sehen Sie, Webstandards sind das Regelwerk, auf dem Webseiten aufbauen. So gibt es Regeln für HTML, CSS,
+                JavaScript oder auch XML; Worte, die Sie vielleicht schon einmal von Ihrem Entwickler gehört haben.
+                Diese
+                Standards sorgen dafür, dass alle Beteiligten aus einer Webseite den größten Nutzen ziehen.
+              </p>
+
+            </div>
+            <div class="back">
+              <h1>– 5 –</h1>
+              <p>
+                Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der
+                Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel? Gerade jetzt, wo er
+                das
+                Ding seines Lebens gedreht hatte und mit der Beute verschwinden wollte!
+              </p>
+
+            </div>
+          </section>
+          <section class="page">
+            <div class="front">
+              <h1>– hoge1 –</h1>
+              <p>
+                Sehen Sie, Webstandards sind das Regelwerk, auf dem Webseiten aufbauen. So gibt es Regeln für HTML, CSS,
+                JavaScript oder auch XML; Worte, die Sie vielleicht schon einmal von Ihrem Entwickler gehört haben.
+                Diese
+                Standards sorgen dafür, dass alle Beteiligten aus einer Webseite den größten Nutzen ziehen.
+              </p>
+
+            </div>
+            <div class="back">
+              <h1>– hoge2 –</h1>
+              <p>
+                Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der
+                Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel? Gerade jetzt, wo er
+                das
+                Ding seines Lebens gedreht hatte und mit der Beute verschwinden wollte!
+              </p>
+
+            </div>
+          </section>
+          <section class="page">
+            <div class="front">
+              <h1>– 6 –</h1>
+              <p>
+                Sehen Sie, Webstandards sind das Regelwerk, auf dem Webseiten aufbauen. So gibt es Regeln für HTML, CSS,
+                JavaScript oder auch XML; Worte, die Sie vielleicht schon einmal von Ihrem Entwickler gehört haben.
+                Diese
+                Standards sorgen dafür, dass alle Beteiligten aus einer Webseite den größten Nutzen ziehen.
+              </p>
+
+            </div>
+            <div class="back">
+            </div>
+          </section>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+  <style>
+    .home__books {
+      padding-top: 300px;
+
+      overflow: hidden;
+    }
+
+    /* h1要素を中央に揃える */
+    h1 {
+      text-align: center;
+    }
+
+    /* シーンのサイズを設定し、3D効果の視点を設定 */
+    .scene {
+      width: 45%;
+
+      /* height: 90%; */
+      /* margin: 5% 5% 5% 50%; */
+      perspective: 3000px;
+      width: 1074px;
+      height: 461px;
+      width: 99.81%;
+      height: 94.46%;
+      margin-inline: auto;
+      transform: translateY(2%);
+    }
+
+    /* 本全体を立体的に保持する */
+    .book {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform: (10%);
+      transform: translateX(50%);
+
+    }
+
+    /* 各ページのスタイルを設定 */
+    .page {
+      cursor: pointer;
+      position: absolute;
+      color: black;
+      width: 50%;
+      height: 100%;
+      transition: 1.5s transform;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+    }
+
+
+    /* 各ページの表面と裏面のスタイルを設定 */
+    .front,
+    .back {
+      position: absolute;
+      /* 絶対位置を設定 */
+      width: 100%;
+      /* 親要素の幅に合わせる */
+      height: 100%;
+      /* 親要素の高さに合わせる */
+      padding: 10% 5% 5%;
+      /* 内側の余白を設定 */
+      box-sizing: border-box;
+      /* パディングを含めたボックスサイズを指定 */
+      backface-visibility: hidden;
+      /* 裏面を非表示にする */
+      background: linear-gradient(to bottom right, #fff, #ccc);
+      /* 背景をグラデーションに設定 */
+
+    }
+
+    .book-all {
+      background: url(./book.png)center/cover;
+      width: min(1076px, 74.722%);
+      margin-inline: auto;
+      height: 488px;
+    }
+
+    .back {
+      background: url(./book_left-min.png) center/cover;
+    }
+
+    .front {
+      background: url(./book_right-min.png) center/cover;
+    }
+
+    /* ページの裏面を180度回転させる */
+    .back {
+      transform: rotateY(180deg);
+    }
+
+    /* アクティブなページを前面に表示する */
+    .page.active {
+      z-index: 1;
+      /* 他のページより前面に表示 */
+    }
+
+    /* フリップされたページを180度回転させる */
+    .page.flipped {
+      transform: rotateY(-180deg);
+    }
+
+    /* 最後のフリップされたページを前面に表示 */
+    .page.flipped:last-of-type {
+      z-index: 1;
+      /* 他のページより前面に表示 */
+    }
+
+    /* 段落のスタイルを設定 */
+    p {
+      margin: 0 0 0.1em;
+      /* 上と下の余白を設定 */
+      text-indent: 1em;
+      /* 最初の行のインデントを設定 */
+    }
+
+    /* QRコードのスタイルを設定 */
+    .qr {
+      margin: 50px auto;
+      /* 上下の余白を設定し、中央揃え */
+      max-width: 50%;
+      /* 最大幅を50%に制限 */
+    }
+
+    .qr img {
+      display: block;
+      /* 画像をブロック要素にすることで中央揃え */
+    }
+
+
+    @media only screen and (max-width: 1240px) {
+      .scene {
+        transform: translateY(0%);
+        height: 100%;
+
+      }
+
+    }
+  </style>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var bookElement = document.querySelector('.book');
+
+      // Hammer.jsのインスタンスを作成
+      var hammer = new Hammer(bookElement);
+
+      hammer.on('swipeleft', nextPage);
+      hammer.on('swiperight', prevPage);
+
+      bookElement.addEventListener('click', function (event) {
+        if (event.target.closest('.active')) {
+          nextPage();
+        } else if (event.target.closest('.flipped:not(.initial)')) {
+          prevPage();
+        }
+      });
+
+      function prevPage() {
+        var lastFlipped = document.querySelectorAll('.flipped');
+        var lastFlippedPage = lastFlipped[lastFlipped.length - 1];
+        if (!lastFlippedPage.classList.contains('initial')) {
+          lastFlippedPage.classList.remove('flipped');
+          lastFlippedPage.classList.add('active');
+          var siblings = Array.prototype.filter.call(lastFlippedPage.parentNode.children, function (child) {
+            return child !== lastFlippedPage;
+          });
+          siblings.forEach(function (sibling) {
+            sibling.classList.remove('active');
+          });
+        }
+      }
+
+      function nextPage() {
+        var activePage = document.querySelector('.active');
+        if (!activePage.nextElementSibling || !activePage.nextElementSibling.classList.contains('page')) {
+          return;
+        }
+        activePage.classList.remove('active');
+        activePage.classList.add('flipped');
+        var nextPage = activePage.nextElementSibling;
+        nextPage.classList.add('active');
+        var siblings = Array.prototype.filter.call(nextPage.parentNode.children, function (child) {
+          return child !== nextPage;
+        });
+        siblings.forEach(function (sibling) {
+          sibling.classList.remove('active');
+        });
+      }
+
+      // 初期状態で最初のページをフリップされた状態に設定
+      document.querySelector('.page').classList.add('flipped', 'initial');
+      document.querySelector('.page:nth-of-type(2)').classList.add('active');
+    });
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .section-top {
+      position: relative;
+      width: 100%;
+      height: 900px;
+      background: url(./top-img.jpg) center/cover;
+    }
+
+    .section-top-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: background-color 0.5s ease;
+      /* 背景色のトランジションを追加 */
+    }
+
+    .section-top-text__content {
+      width: min(584px, 40.555%);
+      transform: translateY(100%);
+      /* 初期状態でテキストを下に配置　最初は見えないようにするとのとのため */
+    }
+
+    .section-top-text__content::-webkit-scrollbar {
+      display: none;
+    }
+
+    h3 {
+      margin-bottom: 144px;
+      font-family: Noto Serif JP;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 15px;
+      letter-spacing: 0.04em;
+      text-align: center;
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .section-top-text__content>div {
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+    }
+
+    p {
+      font-family: Noto Serif JP;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0.17em;
+      color: rgba(255, 255, 255, 1);
+    }
+
+    p:nth-child(even) {
+      text-align: right;
+    }
+
+    span {
+      font-family: Noto Serif JP;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 28px;
+      letter-spacing: 0.22em;
+    }
+
+    .hoge {
+      height: 1000px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+  <section class="hoge"></section>
+  <section class="section-top">
+    <section class="section-top-text">
+      <div class="section-top-text__content">
+        <h3>このようなご要望・お悩みはございませんか？</h3>
+        <div>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？</p>
+          <p><span>不動産投資、<br></span>何から始めるべき？ 終わり</p>
+        </div>
+      </div>
+    </section>
+  </section>
+  <section class="hoge"></section>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 背景スタイルの変更関数
+    function applyBackgroundStyle() {
+      document.querySelector(".section-top-text").style.backgroundColor = "rgba(36, 35, 35, 0.302)";
+    }
+
+    function removeBackgroundStyle() {
+      document.querySelector(".section-top-text").style.backgroundColor = "transparent";
+    }
+
+    // アニメーションの設定
+    gsap.to(".section-top-text__content", {
+      y: "-100%", // テキスト要素を上にスクロールsection-top-text__contentの親要素であるsection-top-textがheight: 100%に設定されているため、実際にはsection-top-text__contentが自身の高さの100%分だけ移動しているのと同じ効果になります。これは、要素の高さが親要素の高さに依存しているため
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".section-top",
+        start: "top top", // section-topが画面のトップに到達した時点でアニメーションが開始　トリガー要素の上端がビューポートの上端に到達したときにアニメーションを開始
+        end: () => "+=" + document.querySelector(".section-top-text__content").offsetHeight,// section-top-text__contentの高さに基づいてスクロール距離を設定
+        pin: ".section-top",
+        scrub: true, //スクロールの進行に応じてアニメーションが前後に動き、スクロールの速度や方向に合わせてアニメーションが再生
+        markers: true,
+        onEnter: applyBackgroundStyle, // section-topがビューポートに入ったときに背景色を適用
+        onLeave: removeBackgroundStyle, // section-topがビューポートから出たときに背景色を削除
+        onEnterBack: applyBackgroundStyle, // section-topが逆方向からビューポートに戻ったときに背景色を適用
+        onLeaveBack: removeBackgroundStyle // section-topが逆方向からビューポートを離れたときに背景色を削除
+      }
+    });
+  </script>
+</body>
+
+</html>

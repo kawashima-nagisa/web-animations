@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="sidebar">
+      <h3>Sticky sidebar</h3>
+      <p>I will follow you!</p>
+      <p><a href="https://caniuse.com/#search=sticky">caniuse stats</a>
+    </div>
+    <div class="main">
+      <h2>Main content</h2>
+      <p>Scroll down the page!</p>
+      <h3>How to recreate this</h3>
+      <p>
+        Position the columns with flex. Then apply two lines of CSS to the sidebar to make it sticky:
+      </p>
+    </div>
+
+
+  </div>
+
+
+  <div class="footer"></div>
+
+
+  <style>
+    .sidebar {
+      position: sticky;
+      top: 0;
+    }
+
+    .footer {
+      height: 300px;
+    }
+
+    .sidebar {
+      width: 25%;
+      height: 25vh;
+      min-height: 200px;
+      overflow: auto;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 5%;
+    }
+
+    .main {
+      width: 60%;
+      height: 200vh;
+      min-height: 1000px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main,
+    .sidebar {
+      border: 5px solid #222;
+      background-color: white;
+      border-radius: 10px;
+      color: #222;
+      padding: 15px;
+    }
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+
+</body>
+
+</html>

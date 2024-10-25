@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>Loading Screen Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Loading画面のスタイル */
+    #loading-screen {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease-out;
+    }
+
+    .hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loading-sentence,
+    .loading-light {
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .fade-in {
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .loading-sentence {
+      aspect-ratio: 117/196;
+      width: 117px;
+    }
+
+    .loading-light {
+      aspect-ratio: 265/579;
+      width: 265px;
+    }
+
+    #loading-logo {
+      position: relative;
+    }
+
+    .loading-light {
+      position: absolute;
+      top: -115%;
+      left: -62%;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loading-screen">
+    <div id="loading-logo">
+      <img src="./loading1.png" alt="" class="loading-sentence">
+      <img src="./loading2.png" alt="" class="loading-light">
+    </div>
+  </div>
+
+  <main>
+    <div id="container">
+      <p>ローディング後、この画面が見えます。</p>
+    </div>
+  </main>
+
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var sentenceImg = document.querySelector('.loading-sentence');
+        sentenceImg.classList.add('fade-in');
+      }, 1000); // 2秒後に表示
+
+      setTimeout(function () {
+        var lightImg = document.querySelector('.loading-light');
+        lightImg.classList.add('fade-in');
+      }, 3000); // 4秒後に表示
+
+      setTimeout(function () {
+        var loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.classList.add('hidden');
+      }, 6000); // 10秒後にフェードアウト
+    });
+  </script>
+
+</body>
+
+</html>

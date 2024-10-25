@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* アニメーション前のスタイル */
+    .js-marker {
+      display: inline;
+      position: relative;
+      background-image: linear-gradient(90deg, #ffff66, #ffff66);
+      /* マーカーの色（黄色）を設定 */
+      background-repeat: no-repeat;
+      /* マーカーの背景を繰り返さないように設定 */
+      background-position: bottom left;
+      /* マーカーの位置を下部左端に設定 */
+      background-size: 0 100%;
+      /* 初期状態では背景の幅を0に設定 */
+      transition: background-size 1s ease-in-out;
+      /* 背景のサイズをアニメーションで変化 */
+      font-weight: bold;
+      /* 太字に設定 */
+    }
+
+    /* アニメーション発火時 */
+    .js-marker.inview {
+      background-size: 100% 100%;
+      /* 画面内に入ったときに背景が全幅に広がる */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div style="height: 3000px;"></div>
+  <span class="js-marker">ここにマーカーで装飾するテキストを入れる</span>
+  <div style="height: 3000px;"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      var markerText = document.querySelectorAll('.js-marker'); // 監視対象の要素を選択
+      var markerTextArr = Array.prototype.slice.call(markerText); // NodeListを配列に変換（IE対策）
+
+      /* IntersectionObserverに渡すコールバック関数 */
+      var cb = function (entries, observer) {
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+            /* 監視対象が画面内に入ったときのアクション */
+            entry.target.classList.add('inview'); // 画面内に入った要素にinviewクラスを付与
+          } else {
+            entry.target.classList.remove('inview'); // 画面外に出た要素のinviewクラスを外す
+          }
+
+        });
+      }
+
+      /* IntersectionObserverのオプション */
+      var options = {
+        root: null, /* ビューポートを基準にする */
+        rootMargin: "0px", /* マージンをゼロに設定 */
+        threshold: 0.1 /* 10% 表示されたときにトリガー */
+      }
+
+      /* IntersectionObserverを初期化 */
+      var io = new IntersectionObserver(cb, options);
+
+      /* 各要素を監視対象に追加 */
+      markerTextArr.forEach(el => {
+        io.observe(el);
+      });
+
+    });
+  </script>
+</body>
+
+</html>

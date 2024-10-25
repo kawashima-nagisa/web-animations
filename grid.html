@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Layout</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="contents">
+    <div class="container">
+      <div class="shrinkable">1</div>
+      <div class="fixed">2</div>
+      <div class="fixed">3</div>
+      <div class="fixed">4</div>
+      <div class="shrinkable">5</div>
+    </div>
+    <div class="container">
+      <div class="shrinkable">6</div>
+      <div class="fixed">7</div>
+      <div class="fixed">8</div>
+      <div class="fixed">9</div>
+      <div class="shrinkable">10</div>
+    </div>
+  </div>
+
+</body>
+
+<style>
+  .contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .container {
+    display: flex;
+    width: min(1795px, 100%);
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .container>div {
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .fixed {
+    width: 20%;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+  }
+
+  .shrinkable {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    /* Allow shrinking to zero width */
+  }
+
+  /* When screen width is less than or equal to 1795px */
+  @media (max-width: 1795px) {
+    .shrinkable {
+      flex-basis: auto;
+      /* Allow shrinking */
+    }
+  }
+</style>
+
+</html>

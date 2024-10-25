@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Hover Animation with Additional Images</title>
+  <!-- GSAPのCDNを読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- ページスタイル -->
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .image {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      /* 画像がコンテナにフィットするように表示 */
+      border-radius: 0;
+      /* 初期状態では四角形 */
+    }
+
+    .image-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+    .small-image {
+      width: 50px;
+      height: 50px;
+      opacity: 0;
+      /* 初期状態では見えない */
+      transform: translateY(0);
+      /* 初期位置をリセット */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 上部の小さな画像 -->
+  <img src="https://via.placeholder.com/50" alt="Top Image" class="small-image top-image" />
+  <!-- 画像を囲むコンテナ -->
+  <div class="image-container">
+    <!-- メイン画像 -->
+    <img src="https://via.placeholder.com/300" alt="Sample Image" class="image" />
+  </div>
+  <!-- 下部の小さな画像 -->
+  <img src="https://via.placeholder.com/50" alt="Bottom Image" class="small-image bottom-image" />
+
+  <!-- スクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // メイン画像、コンテナと小さな画像を選択
+      var image = document.querySelector('.image');
+      var topImage = document.querySelector('.top-image');
+      var bottomImage = document.querySelector('.bottom-image');
+
+      // ホバー時に丸くするアニメーションと上下の画像をフェードイン
+      image.addEventListener('mouseenter', function () {
+        // メイン画像を丸くして拡大するアニメーション
+        gsap.to(image, {
+          duration: 0.5, // アニメーションの速度
+          borderRadius: "50%", // 角を丸くする
+          transform: "scale(1.1)", // 拡大する
+          ease: "power2.out" // スムーズに変化
+        });
+
+        // 上部の画像をフェードインして下に移動
+        gsap.to(topImage, {
+          duration: 0.5, // アニメーションの速度
+          opacity: 1, // 表示する
+          y: 100, // 下に移動
+          ease: "power2.out", // スムーズに変化
+          delay: 0.5 // メインの円形化が終わった後に表示
+        });
+
+        // 下部の画像をフェードインして上に移動
+        gsap.to(bottomImage, {
+          duration: 0.5, // アニメーションの速度
+          opacity: 1, // 表示する
+          y: -100, // 上に移動
+          ease: "power2.out", // スムーズに変化
+          delay: 0.5 // メインの円形化が終わった後に表示
+        });
+      });
+
+      // ホバーを外れたときに元に戻すアニメーション
+      image.addEventListener('mouseleave', function () {
+        // メイン画像を元に戻すアニメーション
+        gsap.to(image, {
+          duration: 0.5, // アニメーションの速度
+          borderRadius: "0%", // 角を元に戻す
+          transform: "scale(1)", // 元のサイズに戻す
+          ease: "power2.out" // スムーズに変化
+        });
+
+        // 上部の画像をフェードアウトして元の位置に戻す
+        gsap.to(topImage, {
+          duration: 0.5, // アニメーションの速度
+          opacity: 0, // 隠す
+          ease: "power2.out" // スムーズに変化
+        });
+
+        // 下部の画像をフェードアウトして元の位置に戻す
+        gsap.to(bottomImage, {
+          duration: 0.5, // アニメーションの速度
+          opacity: 0, // 隠す
+          ease: "power2.out" // スムーズに変化
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
