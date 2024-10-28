@@ -138,9 +138,9 @@
     /* シーンのサイズを設定し、3D効果の視点を設定 */
     .scene {
 
-      perspective: 8000px;
-      width: 94.81%;
-      height: 95.46%;
+      perspective: 2000px;
+      width: 89.81%;
+      height: 96.46%;
       margin-inline: auto;
       transform: translate(1%, 2%);
     }
@@ -194,7 +194,7 @@
       width: min(953px, 103.722%);
       margin-inline: auto;
       height: 687px;
-      overflow: hidden;
+
     }
 
     .back {
@@ -259,6 +259,7 @@
 
       hammer.on('swipeleft', nextPage);
       hammer.on('swiperight', prevPage);
+
 
       bookElement.addEventListener('click', function (event) {
         if (event.target.closest('.active')) {
